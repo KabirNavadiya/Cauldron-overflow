@@ -12,7 +12,7 @@
     "scripts": {
         "dev-server": "encore dev-server",
         "dev": "encore dev",
-        "watch": "encore dev --watch",
+        "watch": "NODE_OPTIONS=--openssl-legacy-provider webpack --watch",
         "build": "encore production --progress"
     }
 }
