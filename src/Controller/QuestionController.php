@@ -30,20 +30,18 @@ class QuestionController extends AbstractController
      */
     public function homepage(QuestionRepository $repository)
     {
-
         $questions = $repository->findAllAskedOrderedByNewest();
         return $this->render('question/homepage.html.twig', [
             'questions' => $questions,
         ]);
-    } 
+    }
 
     /**
      * @Route("/questions/newquestion")
      */
+
     public function newquestion(EntityManagerInterface $entitymanager)
     {
-       
-
         return new Response('Sounds like a GREAT feature for V2');
     }
 
@@ -97,10 +95,8 @@ class QuestionController extends AbstractController
 
         $entitymanager->flush();
 
-        return $this->redirectToRoute('app_question_show',[
-            'slug'=> $question->getSlug(),
+        return $this->redirectToRoute('app_question_show', [
+            'slug' => $question->getSlug(),
         ]);
-
     }
-    
 }

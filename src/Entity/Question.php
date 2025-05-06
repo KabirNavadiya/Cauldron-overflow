@@ -14,9 +14,6 @@ class Question
 {
 
    use TimestampableEntity;
-
-
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
