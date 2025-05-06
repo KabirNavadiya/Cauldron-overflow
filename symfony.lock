@@ -1,6 +1,6 @@
 {
-    "clue/stream-filter": {
-        "version": "v1.4.1"
+    "babdev/pagerfanta-bundle": {
+        "version": "v3.6.1"
     },
     "composer/package-versions-deprecated": {
         "version": "1.11.99"
@@ -64,18 +64,6 @@
     "doctrine/lexer": {
         "version": "1.2.0"
     },
-    "guzzlehttp/promises": {
-        "version": "v1.3.1"
-    },
-    "guzzlehttp/psr7": {
-        "version": "1.6.1"
-    },
-    "http-interop/http-factory-guzzle": {
-        "version": "1.0.0"
-    },
-    "jean85/pretty-package-versions": {
-        "version": "1.2"
-    },
     "knplabs/knp-markdown-bundle": {
         "version": "1.8.1"
     },
@@ -97,24 +85,6 @@
     "php": {
         "version": "7.2.5"
     },
-    "php-http/client-common": {
-        "version": "2.1.0"
-    },
-    "php-http/discovery": {
-        "version": "1.7.4"
-    },
-    "php-http/httplug": {
-        "version": "2.1.0"
-    },
-    "php-http/message": {
-        "version": "1.8.0"
-    },
-    "php-http/message-factory": {
-        "version": "v1.0.2"
-    },
-    "php-http/promise": {
-        "version": "v1.0.0"
-    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -124,20 +94,8 @@
     "psr/event-dispatcher": {
         "version": "1.0.0"
     },
-    "psr/http-client": {
-        "version": "1.0.0"
-    },
-    "psr/http-factory": {
-        "version": "1.0.1"
-    },
-    "psr/http-message": {
-        "version": "1.0.1"
-    },
     "psr/log": {
         "version": "1.1.2"
-    },
-    "ralouphie/getallheaders": {
-        "version": "3.0.3"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -151,26 +109,20 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
-    "sentry/sdk": {
-        "version": "2.1.0"
-    },
-    "sentry/sentry": {
-        "version": "2.3.2"
-    },
     "sentry/sentry-symfony": {
-        "version": "3.0",
+        "version": "5.2",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
+            "branch": "main",
             "version": "3.0",
-            "ref": "9746f0823302d7980e5273ef7a69ef3f5ac80914"
+            "ref": "31024cb40a800443dc032ce8b463b73879a7942a"
         },
         "files": [
-            "config/packages/sentry.yaml"
+            "config/packages/prod/sentry.yaml"
         ]
     },
     "stof/doctrine-extensions-bundle": {
-        "version": "1.5",
+        "version": "1.7",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "main",
@@ -275,9 +227,6 @@
             "src/Kernel.php"
         ]
     },
-    "symfony/http-client": {
-        "version": "v5.1.11"
-    },
     "symfony/http-client-contracts": {
         "version": "v2.3.1"
     },
@@ -314,9 +263,6 @@
             "config/packages/test/monolog.yaml"
         ]
     },
-    "symfony/options-resolver": {
-        "version": "v5.0.7"
-    },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.17.1"
     },
@@ -335,18 +281,6 @@
     "symfony/polyfill-uuid": {
         "version": "v1.15.0"
     },
-    "symfony/psr-http-message-bridge": {
-        "version": "2.1",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "2.1",
-            "ref": "df8ec1e90aec60d301ec59a22093fc3febedb795"
-        },
-        "files": [
-            "config/packages/psr_http_message_bridge.yaml"
-        ]
-    },
     "symfony/routing": {
         "version": "5.1",
         "recipe": {
@@ -360,21 +294,6 @@
             "config/packages/routing.yaml",
             "config/routes.yaml"
         ]
-    },
-    "symfony/security-bundle": {
-        "version": "5.1",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "5.1",
-            "ref": "0a4bae19389d3b9cba1ca0102e3b2bccea724603"
-        },
-        "files": [
-            "config/packages/security.yaml"
-        ]
-    },
-    "symfony/security-core": {
-        "version": "v5.0.7"
     },
     "symfony/service-contracts": {
         "version": "v2.0.1"
@@ -452,19 +371,19 @@
         ]
     },
     "symfony/webpack-encore-bundle": {
-        "version": "1.6",
+        "version": "1.17",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.6",
-            "ref": "69e1d805ad95964088bd510c05995e87dc391564"
+            "branch": "main",
+            "version": "1.9",
+            "ref": "06f92cd7b9e7df74ed637075678da31e85a28dd9"
         },
         "files": [
-            "assets/css/app.css",
-            "assets/js/app.js",
-            "config/packages/assets.yaml",
-            "config/packages/prod/webpack_encore.yaml",
-            "config/packages/test/webpack_encore.yaml",
+            "assets/app.js",
+            "assets/bootstrap.js",
+            "assets/controllers.json",
+            "assets/controllers/hello_controller.js",
+            "assets/styles/app.css",
             "config/packages/webpack_encore.yaml",
             "package.json",
             "webpack.config.js"
