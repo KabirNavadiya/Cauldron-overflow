@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AnswerController extends AbstractController
+class AnswerController extends AbstractController 
 {
     /**
      * @Route("/answers/popular", name="app_popular_answers")
@@ -28,7 +28,7 @@ class AnswerController extends AbstractController
 
     /**
      * @Route("/answers/{id}/vote", methods="POST", name="answer_vote")
-     */ 
+     */
     public function answerVote(Answer $answer, LoggerInterface $logger, Request $request, EntityManagerInterface $entitymanager)
     {
         $data = json_decode($request->getContent(), true);
@@ -42,7 +42,7 @@ class AnswerController extends AbstractController
             $logger->info('Voting down!');
             $answer->setVotes($answer->getVotes() - 1);
         }
- 
+
         $entitymanager->flush();
 
         return $this->json(['votes' => $answer->getVotes()]);
