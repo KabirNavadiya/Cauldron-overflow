@@ -12,17 +12,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AnswerController extends AbstractController 
 {
+   
     /**
-     * @Route("/answers/popular", name="app_popular_answers")
+     * @Route("/answers/popular",name="app_popular_answers")
      */
-    public function popularAnswers(AnswerRepository $answerRepository, Request $request)
+    public function popularAnswers(AnswerRepository $answerRepository)
     {
-        $answers = $answerRepository->findMostPopular(
-            $request->query->get('q')
-        );
-
-        return $this->render('answer/popularAnswers.html.twig', [
-            'answers' => $answers
+        $answers = $answerRepository->findMostPopular();
+        return $this->render('answer/popularAnswers.html.twig',[
+            'answers'=>$answers,
         ]);
     }
 
@@ -47,4 +45,7 @@ class AnswerController extends AbstractController
 
         return $this->json(['votes' => $answer->getVotes()]);
     }
+
+
+
 }
