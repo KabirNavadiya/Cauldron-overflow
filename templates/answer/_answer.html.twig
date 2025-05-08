@@ -4,7 +4,7 @@
             slug: answer.question.slug
         }) }}">
         <strong>Question:</strong>
-        {{ answer.question.question }}
+        {{ answer.questionText|u.truncate(80,'...') }}
         </a>
     {% endif %}
 	<div class="row ">
