@@ -119,7 +119,7 @@ class Answer
 
         return $this;
     }
-
+    
     public function isApproved(): bool
     {
         return $this->status === self::STATUS_APPROVED;
