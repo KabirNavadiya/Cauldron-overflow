@@ -26,15 +26,6 @@ class Tag
      */
     private $name;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Question::class, mappedBy="tags")
-     */
-    private $questions;
-
-    public function __construct()
-    {
-        $this->questions = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -49,33 +40,6 @@ class Tag
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Question>
-     */
-    public function getQuestions(): Collection
-    {
-        return $this->questions;
-    }
-
-    public function addQuestion(Question $question): self
-    {
-        if (!$this->questions->contains($question)) {
-            $this->questions[] = $question;
-            $question->addTag($this);
-        }
-
-        return $this;
-    }
-
-    public function removeQuestion(Question $question): self
-    {
-        if ($this->questions->removeElement($question)) {
-            $question->removeTag($this);
-        }
 
         return $this;
     }
