@@ -12,7 +12,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 class Answer
 {
 
-    public const STATUS_NEEDS_APPROVAL = 'needs_approval'; 
+    public const STATUS_NEEDS_APPROVAL = 'needs_approval';
     public const STATUS_SPAM = 'spam';
     public const STATUS_APPROVED = 'approved';
     use TimestampableEntity;
@@ -96,9 +96,9 @@ class Answer
         return $this->question;
     }
 
-    public function getQuestionText():string
+    public function getQuestionText(): string
     {
-        if(!$this->getQuestion()){
+        if (!$this->getQuestion()) {
             return '';
         }
 
@@ -121,14 +121,14 @@ class Answer
     {
 
 
-        if(!in_array($status,[self::STATUS_NEEDS_APPROVAL,self::STATUS_APPROVED,self::STATUS_SPAM])){
-            throw new \InvalidArgumentException(sprintf('Invalid status %s',$status));
+        if (!in_array($status, [self::STATUS_NEEDS_APPROVAL, self::STATUS_APPROVED, self::STATUS_SPAM])) {
+            throw new \InvalidArgumentException(sprintf('Invalid status %s', $status));
         }
         $this->status = $status;
 
         return $this;
     }
-    
+
     public function isApproved(): bool
     {
         return $this->status === self::STATUS_APPROVED;

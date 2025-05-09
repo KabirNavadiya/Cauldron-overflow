@@ -17,7 +17,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 class Question
 {
 
-   use TimestampableEntity;
+    use TimestampableEntity;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -131,8 +131,8 @@ class Question
     public function getVotesString()
     {
         $prefix = $this->getVotes() >= 0 ? '+' : '-';
-        return sprintf('%s %d',$prefix,abs($this->getVotes()));
-    }    
+        return sprintf('%s %d', $prefix, abs($this->getVotes()));
+    }
     public function setVotes(int $votes): self
     {
         $this->votes = $votes;
@@ -140,12 +140,12 @@ class Question
         return $this;
     }
 
-    public function upVote():self
+    public function upVote(): self
     {
         $this->votes++;
         return $this;
     }
-    public function downVote():self
+    public function downVote(): self
     {
         $this->votes--;
         return $this;
@@ -162,8 +162,8 @@ class Question
 
     public function getApprovedAnswers(): Collection
     {
-       return $this->answers->matching(AnswerRepository::createApprovedCriteria());
-    } 
+        return $this->answers->matching(AnswerRepository::createApprovedCriteria());
+    }
 
     public function addAnswer(Answer $answer): self
     {
@@ -216,6 +216,4 @@ class Question
 
         return $this;
     }
-
-   
 }

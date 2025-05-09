@@ -53,7 +53,7 @@ final class QuestionFactory extends ModelFactory
             ),
             'votes' => rand(-20, 50),
             'askedAt' => self::faker()->dateTimeBetween('-100 days', '-1 minute')
-            
+
         ];
     }
 

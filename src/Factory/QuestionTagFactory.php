@@ -39,8 +39,8 @@ final class QuestionTagFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'question'=>QuestionFactory::new(),
-            'tag'=>TagFactory::new(),
+            'question' => QuestionFactory::new(),
+            'tag' => TagFactory::new(),
             'taggedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }

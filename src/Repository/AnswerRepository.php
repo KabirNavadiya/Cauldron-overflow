@@ -49,44 +49,43 @@ class AnswerRepository extends ServiceEntityRepository
     }
 
 
-    public static  function createApprovedCriteria():Criteria
+    public static  function createApprovedCriteria(): Criteria
     {
-        return $criteria = Criteria::create()->andwhere(Criteria::expr()->eq('status',Answer::STATUS_APPROVED));
-
+        return $criteria = Criteria::create()->andwhere(Criteria::expr()->eq('status', Answer::STATUS_APPROVED));
     }
 
     /**
      * @return Answer[]
      */
-    public function findAllApproved(int $max = 10):array
+    public function findAllApproved(int $max = 10): array
     {
         return $this->createQueryBuilder('answer')
-                        ->addCriteria(self::createApprovedCriteria())
-                        ->setMaxResults($max)
-                        ->getQuery()
-                        ->getResult();
+            ->addCriteria(self::createApprovedCriteria())
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult();
     }
 
     /**
      * @return Answer[]
      */
-    public function findMostPopular(string $search = null):array
+    public function findMostPopular(string $search = null): array
     {
         $queryBuilder = $this->createQueryBuilder('answer')
-                        ->addCriteria(self::createApprovedCriteria())
-                        ->orderBy('answer.votes','DESC')
-                        ->innerJoin('answer.question','question')
-                        ->addSelect('question');
+            ->addCriteria(self::createApprovedCriteria())
+            ->orderBy('answer.votes', 'DESC')
+            ->innerJoin('answer.question', 'question')
+            ->addSelect('question');
 
-        if($search){
-            $queryBuilder->andWhere('answer.content LIKE :searchTerm OR question.question LIKE :searchTerm') 
-                        ->setParameter('searchTerm','%'.$search.'%');
+        if ($search) {
+            $queryBuilder->andWhere('answer.content LIKE :searchTerm OR question.question LIKE :searchTerm')
+                ->setParameter('searchTerm', '%' . $search . '%');
         }
 
         return $queryBuilder
-                ->setMaxResults(10)
-                ->getQuery()
-                ->getResult();
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
     }
 
 

@@ -37,7 +37,7 @@ final class AnswerFactory extends ModelFactory
     }
 
 
-    public function needsApproval():self
+    public function needsApproval(): self
     {
         return $this->addState(['status' => Answer::STATUS_NEEDS_APPROVAL]);
     }
@@ -47,7 +47,7 @@ final class AnswerFactory extends ModelFactory
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
             'content' => self::faker()->text(),
             'username' => self::faker()->userName(),
-            'votes' => self::faker()->numberBetween(-20,50),
+            'votes' => self::faker()->numberBetween(-20, 50),
             'createdAt' => self::faker()->dateTimeBetween('-1 year'),
             'question' => QuestionFactory::new()->unpublished(),
             'status' => Answer::STATUS_APPROVED,
