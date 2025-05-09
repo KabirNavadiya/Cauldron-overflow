@@ -8,6 +8,7 @@ use App\Factory\AnswerFactory;
 use App\Factory\QuestionFactory;
 use App\Factory\QuestionTagFactory;
 use App\Factory\TagFactory;
+use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -46,6 +47,11 @@ class AppFixtures extends Fixture
                 'question' => $questions[array_rand($questions)]
             ];
         })->needsApproval()->many(20)->create();
+
+
+
+        UserFactory::createOne(['email'=>'kabir_admin@example.com']);
+        UserFactory::createMany(10);
 
         $manager->flush();
     }
