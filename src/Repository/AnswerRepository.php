@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -69,7 +70,7 @@ class AnswerRepository extends ServiceEntityRepository
     /**
      * @return Answer[]
      */
-    public function findMostPopular(string $search = null): array
+    public function findMostPopular(string $search = null): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('answer')
             ->addCriteria(self::createApprovedCriteria())
@@ -83,9 +84,9 @@ class AnswerRepository extends ServiceEntityRepository
         }
 
         return $queryBuilder
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult();
+            ->setMaxResults(10);
+            // ->getQuery()
+            // ->getResult();
     }
 
 

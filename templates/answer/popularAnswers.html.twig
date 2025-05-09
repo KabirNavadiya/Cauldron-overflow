@@ -15,11 +15,12 @@
             </form>
 		</div>
 			<ul class="list-unstyled">
-				{% for answer in answers %}
+				{% for answer in pager %}
 					{{ include('answer/_answer.html.twig',{
                         showQuestion:true
                     }) }}
 				{% endfor %}
 			</ul>
+			{{ pagerfanta(pager ) }}
 	</div>
 {% endblock %}

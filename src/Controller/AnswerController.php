@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Answer;
 use App\Repository\AnswerRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,15 +16,22 @@ class AnswerController extends AbstractController
 {
 
     /**
-     * @Route("/answers/popular",name="app_popular_answers")
+     * @Route("/answers/popular/{page<\d+>}",name="app_popular_answers")
      */
-    public function popularAnswers(AnswerRepository $answerRepository, Request $request)
+    public function popularAnswers(AnswerRepository $answerRepository, Request $request,int $page = 1)
     {
-        $answers = $answerRepository->findMostPopular(
+        $queryBuilder = $answerRepository->findMostPopular(
             $request->query->get('q')
         );
+
+        $pagerfanta = new Pagerfanta(
+            new QueryAdapter($queryBuilder)
+        );
+        $pagerfanta->setMaxPerPage(5);
+        $pagerfanta->setCurrentPage($page);
+
         return $this->render('answer/popularAnswers.html.twig', [
-            'answers' => $answers,
+            'pager' => $pagerfanta,
         ]);
     }
 
