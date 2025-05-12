@@ -35,7 +35,6 @@ class QuestionController extends AbstractController
     {
         $queryBuilder = $repository->createAskedOrderedByNewestQueryBuilder();
 
-
         $pagerfanta = new Pagerfanta(
             new QueryAdapter($queryBuilder)
         );
