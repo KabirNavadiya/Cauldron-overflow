@@ -16,6 +16,7 @@ class SecurityController extends AbstractController
     {
         return $this->render('security/login.html.twig',[
             'error'=>$authenticationUtils->getLastAuthenticationError(),
+            'last_username' => $authenticationUtils->getLastUsername(),
         ]);
     }
     
@@ -26,5 +27,5 @@ class SecurityController extends AbstractController
     {
       throw new \Exception('logout() should never be reached. ');
     }
-    
+
 }

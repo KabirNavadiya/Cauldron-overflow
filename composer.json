@@ -14,7 +14,7 @@
         "knplabs/knp-time-bundle": "^1.11",
         "pagerfanta/doctrine-orm-adapter": "*",
         "pagerfanta/twig": "^3.3",
-        "sensio/framework-extra-bundle": "^6.0",
+        "sensio/framework-extra-bundle": "^6.2",
         "sentry/sentry-symfony": "^5.2",
         "stof/doctrine-extensions-bundle": "^1.7",
         "symfony/asset": "5.3.*",

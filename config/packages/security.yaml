@@ -19,7 +19,18 @@ security:
         main:
             lazy: true
             provider: app_user_provider
-            custom_authenticator: App\Security\LoginFormAuthenticator
+            # entry_point: form_login
+            entry_point: App\Security\LoginFormAuthenticator
+            custom_authenticator:
+                - App\Security\LoginFormAuthenticator
+                - App\Security\DummyAuthenticator
+                # view form-login config option by : symfony console debug:config security (give cuurent security configs)
+            # form-login:
+            #     login_path: app_login
+            #     check_path: app_login
+            #     username_parameter: email
+            #     password_parameter: password
+            #     enable_csrf: true
             logout: true
 
             remember_me:

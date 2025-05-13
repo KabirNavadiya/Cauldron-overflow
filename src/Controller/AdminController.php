@@ -48,7 +48,6 @@ class AdminController extends AbstractController
                 ],
             ],
         ]);
-
         return $this->render('admin/dashboard.html.twig', [
             'chart' => $chart,
             'chart2' => $chart2,
