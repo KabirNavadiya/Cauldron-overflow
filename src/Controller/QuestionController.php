@@ -66,22 +66,20 @@ class QuestionController extends AbstractController
         if ($this->isDebug) {
             $this->logger->info('We are in debug mode!');
         }
-
-        // $repository = $entitymanager->getRepository(Question::class);
-
-        // /**
-        //  * @var Question|null $question
-        //  */
-
-        // $question = $repository->findOneBy(['slug'=>$slug]);
-
-        // if(!$question){
-        //     throw $this->createNotFoundException(sprintf('No question found for slug "%s"',$slug));
-        // } 
-
-
-
         return $this->render('question/show.html.twig', [
+            'question' => $question,
+        ]);
+    }
+
+    /**
+     * @Route("/questions/edit/{slug}", name="app_question_edit")
+     */
+
+    public function edit(Question $question)
+    {
+        $this->denyAccessUnlessGranted('EDIT',$question);
+
+        return $this->render('question/edit.html.twig', [
             'question' => $question,
         ]);
     }

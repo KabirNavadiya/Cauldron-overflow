@@ -15,12 +15,25 @@ use Doctrine\Persistence\ObjectManager;
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
-    {
+    {   
+        UserFactory::createOne([
+            'email'=>'kabir_admin@example.com',
+            'roles' => ['ROLE_ADMIN'],
+        ]);
+        UserFactory::createOne([
+            'email'=>'kabir_user@example.com',
+        ]);
+        UserFactory::createMany(10);
+
 
         TagFactory::createMany(100);
 
 
-        $questions = QuestionFactory::new()->createMany(10);
+        $questions = QuestionFactory::new()->createMany(10, function(){
+            return [
+                'owner'=>UserFactory::random(),
+            ];
+        });
 
         QuestionTagFactory::createMany(100, function () {
 
@@ -50,15 +63,7 @@ class AppFixtures extends Fixture
 
 
 
-        UserFactory::createOne([
-            'email'=>'kabir_admin@example.com',
-            'roles' => ['ROLE_ADMIN'],
-        ]);
-        UserFactory::createOne([
-            'email'=>'kabir_user@example.com',
-        ]);
-        UserFactory::createMany(10);
-
+       
         $manager->flush();
     }
 }
