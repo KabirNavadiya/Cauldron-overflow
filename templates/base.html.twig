@@ -15,14 +15,10 @@
 	{% endblock %}
 </head>
 
-<body 
-	{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-		{{ stimulus_controller('user-api',{
-			url: path('app_user_api_me')
-		}) }}
-	{% endif %}
->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light px-1" {{ is_granted('ROLE_PREVIOUS_ADMIN') ? 'style="background-color: red !important" : height: 100px;' }}>
+<body {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %} {{ stimulus_controller('user-api',{ url:
+	path('app_user_api_me') }) }} {% endif %}>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light px-1" {{ is_granted('ROLE_PREVIOUS_ADMIN')
+		? 'style="background-color: red !important" : height: 100px;' }}>
 		<a class="navbar-brand" href="{{ path('app_homepage') }}">
 			<i style="color: #444; font-size: 2rem;" class="pb-1 fad fa-cauldron"></i>
 			<p class="pl-2 d-inline font-weight-bold" style="color: #444;">Cauldron Overflow</p>
@@ -45,17 +41,18 @@
 		{# only returns true or false based on if the user is logged in or not The ROLE_ prefix is not needed #}
 		{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 		<div class="dropdown">
-			<button class=" btn dropdown-toggle" type="button" id="user-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-				<img src="{{ app.user.avatarUri }}"
-					alt="{{ app.user.displayName }} Avatar">
+			<button class=" btn dropdown-toggle" type="button" id="user-dropdown" data-bs-toggle="dropdown"
+				aria-expanded="false">
+				<img src="{{ app.user.avatarUri }}" alt="{{ app.user.displayName }} Avatar">
 			</button>
 			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-dropdown">
 
 				{% if is_granted('ROLE_PREVIOUS_ADMIN') %}
-					<li>
-						<a href="{{ path('app_homepage',{'_switch_user': '_exit'}) }}" class="dropdown-item"> Exit Impersonation</a>
-					</li>
-				{% endif %}	
+				<li>
+					<a href="{{ path('app_homepage',{'_switch_user': '_exit'}) }}" class="dropdown-item"> Exit
+						Impersonation</a>
+				</li>
+				{% endif %}
 				<li>
 					<a href="{{ path('app_logout') }}" class="dropdown-item"> Log Out</a>
 				</li>
@@ -71,6 +68,15 @@
 		{% endif %}
 	</nav>
 
+	{% for flash in app.flashes('success') %}
+		<div class="alert alert-success">{{ flash }}</div>
+	{% endfor %}
+
+
+	{% for flash in app.flashes('error') %}
+		<div class="alert alert-danger">{{ flash }}</div>
+	{% endfor %}
+
 	{% block body %}{% endblock %}
 	<footer class="mt-5 p-3 text-center">
 		Made with
@@ -79,13 +85,14 @@
 		<a style="color: #444; text-decoration: underline;" href="https://symfonycasts.com">SymfonyCasts</a>
 	</footer>
 	{% block javascripts %}
-	{{ encore_entry_script_tags('app') }}
+		{{ encore_entry_script_tags('app') }}
 	{% endblock %}
 
-	
 
-{# bootstrap js #}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="..." crossorigin="anonymous"></script>
+
+	{# bootstrap js #}
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="..."
+		crossorigin="anonymous"></script>
 
 </body>
 
