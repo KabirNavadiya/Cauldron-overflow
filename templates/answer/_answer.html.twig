@@ -18,6 +18,7 @@
 		</div>
 		<div class="col-2 text-end">
 			<small>{{ answer.createdAt|ago }}</small>
+			{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 			<div class="vote-arrows flex-fill pt-2 js-vote-arrows" style="min-width: 90px;" {{stimulus_controller('answer-vote',{url:path('answer_vote',{ id: answer.id } ) }) }}>
 				<button class="vote-up btn btn-link" name="direction" value="up" {{ stimulus_action('answer-vote','clickVote') }}>
 					<i class="far fa-arrow-alt-circle-up"></i>
@@ -31,6 +32,7 @@
 					</span>
 				</span>
 			</div>
+			{% endif %}
 		</div>
 	</div>
 </li>

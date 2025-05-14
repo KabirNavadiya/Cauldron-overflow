@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AnswerController extends AbstractController
+class AnswerController extends BaseController
 {
 
     /**
@@ -37,9 +37,17 @@ class AnswerController extends AbstractController
 
     /**
      * @Route("/answers/{id}/vote", methods="POST", name="answer_vote")
+     * 
      */
     public function answerVote(Answer $answer, LoggerInterface $logger, Request $request, EntityManagerInterface $entitymanager)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        $logger->info('{user} is voting on ansnwer {answer}',[
+            'user'=>$this->getUser()->getEmail(),
+            'answer'=>$answer->getId(),
+        ]);
+
         $data = json_decode($request->getContent(), true);
         $direction = $data['direction'] ?? 'up';
 

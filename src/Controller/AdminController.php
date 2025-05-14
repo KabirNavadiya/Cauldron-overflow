@@ -42,12 +42,14 @@ class AdminController extends AbstractController
                     'backgroundColor' => [
                       'rgb(255, 99, 132)',
                       'rgb(54, 162, 235)',
-                      'rgb(255, 205, 86)'
+                      'rgb(255, 205, 86)',
+                      'rgba(151, 145, 145, 0.53)'
                     ],
                     'hoverOffset' => 4,
                 ],
             ],
         ]);
+
         return $this->render('admin/dashboard.html.twig', [
             'chart' => $chart,
             'chart2' => $chart2,
