@@ -9,16 +9,13 @@
 	</title>
 	{% block stylesheets %}
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-		integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
 	{{ encore_entry_link_tags('app') }}
 	{% endblock %}
 </head>
 
-<body {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %} {{ stimulus_controller('user-api',{ url:
-	path('app_user_api_me') }) }} {% endif %}>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light px-1" {{ is_granted('ROLE_PREVIOUS_ADMIN')
-		? 'style="background-color: red !important" : height: 100px;' }}>
+<body {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %} {{ stimulus_controller('user-api',{ url: path('app_user_api_me') }) }} {% endif %}>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light px-1" {{ is_granted('ROLE_PREVIOUS_ADMIN') ? 'style="background-color: red !important" : height: 100px;' }}>
 		<a class="navbar-brand" href="{{ path('app_homepage') }}">
 			<i style="color: #444; font-size: 2rem;" class="pb-1 fad fa-cauldron"></i>
 			<p class="pl-2 d-inline font-weight-bold" style="color: #444;">Cauldron Overflow</p>
@@ -41,18 +38,19 @@
 		{# only returns true or false based on if the user is logged in or not The ROLE_ prefix is not needed #}
 		{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 		<div class="dropdown">
-			<button class=" btn dropdown-toggle" type="button" id="user-dropdown" data-bs-toggle="dropdown"
-				aria-expanded="false">
+			<button class=" btn dropdown-toggle" type="button" id="user-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
 				<img src="{{ app.user.avatarUri }}" alt="{{ app.user.displayName }} Avatar">
 			</button>
 			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-dropdown">
 
 				{% if is_granted('ROLE_PREVIOUS_ADMIN') %}
 				<li>
-					<a href="{{ path('app_homepage',{'_switch_user': '_exit'}) }}" class="dropdown-item"> Exit
-						Impersonation</a>
+					<a href="{{ path('app_homepage',{'_switch_user': '_exit'}) }}" class="dropdown-item"> Exit Impersonation</a>
 				</li>
 				{% endif %}
+				<li>
+					<a href="{{ path('app_2fa_enable') }}" class="dropdown-item"> Enable 2fa</a>
+				</li>
 				<li>
 					<a href="{{ path('app_logout') }}" class="dropdown-item"> Log Out</a>
 				</li>

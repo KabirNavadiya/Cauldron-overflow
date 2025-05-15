@@ -9,14 +9,12 @@ export default class extends Controller {
 
         axios.post('/verify/getLink')
             .then(response => {
-                const data = response.data;
-                console.log("kabir");
-                
+                const data = response.data;                
                 if (data.success) {
                     this.outputTarget.innerHTML = `
                         <div class="alert alert-success text-break">
                             <strong>Verify your email:</strong><br>
-                            <a href="${data.link}" target="_blank">${data.link}</a>
+                            <a href="${data.link}">${data.link}</a>
                         </div>
                     `;
                 } else {

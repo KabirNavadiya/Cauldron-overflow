@@ -40,7 +40,6 @@ class RegistrationController extends AbstractController
             );
 
 
-
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
@@ -83,7 +82,7 @@ class RegistrationController extends AbstractController
                  
             );
         } catch (VerifyEmailExceptionInterface $e) {
-            $this->addFlash('error',$e->getReason());
+            // $this->addFlash('error',$e->getReason());
 
             return $this->redirectToRoute('app_register');
         }
@@ -93,7 +92,7 @@ class RegistrationController extends AbstractController
        $entityManager->flush();
 
        $this->addFlash('success','Account verified. Now you can log in. ');
-       return $this->redirectToRoute('app_login');
+       return $this->redirectToRoute('app_homepage');
     }
 
     /**
