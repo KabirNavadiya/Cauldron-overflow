@@ -8,7 +8,9 @@ use App\Repository\UserRepository;
 use App\Security\LoginFormAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -92,5 +94,42 @@ class RegistrationController extends AbstractController
 
        $this->addFlash('success','Account verified. Now you can log in. ');
        return $this->redirectToRoute('app_login');
+    }
+
+    /**
+     * 
+     * @Route("/verify/resend",name = "app_verify_resend_email")
+     */
+    public function resendVerifyEmail()
+    {
+        return $this->render('registration/resend_verify_email.html.twig');
+    }
+
+
+
+    /**
+     * @Route("/verify/getLink", name = "app_get_link",  methods={"POST"})
+     */
+    public function getVerifyLink(VerifyEmailHelperInterface $verifyEmailHelper, UserRepository $userRepository,RequestStack $requestStack):JsonResponse
+    {
+        $session = $requestStack->getSession();
+        $email = $session->get('unverified_user_email');
+        $user = $userRepository->findOneBy(['email' => $email]);
+
+        $signatureComponents = $verifyEmailHelper->generateSignature(
+            'app_verify_email',
+            $user->getId(),
+            $user->getEmail(),
+            ['id'=>$user->getId()]
+        );
+
+        //TODO: in real app, send this as an email.
+        // $this->addFlash('success','Confirm your email at '.$signatureComponents->getSignedUrl());
+        $session->remove('unverified_user_email');
+
+        return new JsonResponse([
+            'success' => true,
+            'link' => $signatureComponents->getSignedUrl()
+        ]);
     }
 }

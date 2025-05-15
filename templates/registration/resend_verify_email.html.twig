@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Verify Email {% endblock %}
+
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="login-form bg-light mt-4 p-4">
+            <h1 class="h3 mb-3 font-weight-normal">Verify you Email</h1>
+
+            {% for flash in app.flashes('success') %}
+            <div class="alert alert-success">{{ flash }}</div>
+            {% endfor %}
+
+
+            {% for flash in app.flashes('error') %}
+            <div class="alert alert-danger">{{ flash }}</div>
+            {% endfor %}
+
+            <p>
+                A verification email was sent - please click it to enable your
+                account befor logging in.
+            </p>
+
+            <div {{ stimulus_controller('verify-link') }}>
+                <button {{ stimulus_action('verify-link','generate') }} class="btn btn-primary"
+                    data-verify-link-target="button">
+                    Re-send Email
+                </button>
+            <div class="mt-3 " data-verify-link-target="output"></div>
+            </div>
+
+
+            {# <a href="{{ path('app_get_link') }}" class=" btn btn-primary"> Re-send Email</a> #}
+        </div>
+    </div>
+</div>
+{% endblock %}
